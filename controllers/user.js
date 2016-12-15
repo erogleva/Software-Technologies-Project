@@ -103,6 +103,14 @@ module.exports = {
 
         let email = req.params.email;
 
+        if(!req.isAuthenticated()){
+            let returnUrl = `/user/details/${email}`;
+            req.session.returnUrl = returnUrl;
+
+            res.redirect('/user/login');
+            return;
+        }
+
         User.findOne({email: email}).populate('articles').then(user => {
 
             User.populate(user.fullName, {path: 'fullName'}, (err) => {
