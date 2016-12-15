@@ -1,5 +1,6 @@
 const User = require('mongoose').model('User');
 const Role = require('mongoose').model('Role');
+const Tag = require('mongoose').model('Tag');
 const encryption = require('./../utilities/encryption');
 
 module.exports = {
@@ -96,5 +97,28 @@ module.exports = {
     logout: (req, res) => {
         req.logOut();
         res.redirect('/');
+    },
+
+    details: (req, res) => {
+
+        let email = req.params.email;
+
+        User.findOne({email: email}).populate('articles').then(user => {
+
+            User.populate(user.fullName, {path: 'fullName'}, (err) => {
+                if (err) {
+                    console.log(err.message);
+                }
+
+                Tag.populate(user.articles, {path: 'tags'}, (err) => {
+                    if (err) {
+                        console.log(err.message);
+                    }
+                    res.render('user/details', user);
+                })
+            });
+
+
+        })
     }
 };
