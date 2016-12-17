@@ -3,13 +3,16 @@
         <div class="row">
         <div class="col-md-8">
             <form class="form-inline">
+            {{#if isUserAuthorized}}
                 <div class="form-group">
                     <label for="email" class="h4">Email:</label>
-                    <input type="text" class="form-control" id="email" value="{{email}}" disabled>
+                    <input type="text" class="form-control" id="email" value="{{user.email}}" disabled>
                 </div>
+            {{/if}}
+
                 <div class="form-group">
                     <label for="fullName" class="h4">Full Name:</label>
-                    <input type="text" class="form-control"  id="fullName" value="{{fullName}}" disabled>
+                    <input type="text" class="form-control"  id="fullName" value="{{user.fullName}}" disabled>
                 </div>
             </form>
             </div>
@@ -17,9 +20,9 @@
     </div>
 
     <div class="well">
-    <h3>Your Articles:</h3>
+    <h3>Articles:</h3>
     <div class="row">
-        {{#each articles}}
+        {{#each user.articles}}
             <div class="col-md-6">
                 <article>
                     <header>
@@ -34,12 +37,11 @@
                                href="/tag/{{this.name}}">{{ this.name }}</a>
                         {{/each}}
                     </p>
-                    <footer>
                         <div class="pull-right">
-                            <a class="btn btn-default btn-xs" href="/article/edit/{{this.id}}">Edit &raquo;</a>
+                            <a class="btn btn-default btn-xs" href="/article/details/{{this.id}}">Read more &raquo;</a>
+                            <a class="btn btn-success btn-xs" href="/article/edit/{{this.id}}">Edit &raquo;</a>
                             <a class="btn btn-danger btn-xs" href="/article/delete/{{this.id}}">Delete &raquo;</a>
                         </div>
-                    </footer>
                 </article>
             </div>
         {{/each}}

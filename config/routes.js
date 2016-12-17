@@ -3,6 +3,7 @@ const articleController = require('./../controllers/article');
 const homeController = require('./../controllers/home');
 const adminController = require('./../controllers/admin/admin');
 const tagController = require('./../controllers/tag');
+const commentController = require('./../controllers/comment');
 
 module.exports = (app) => {
     app.get('/', homeController.index);
@@ -16,7 +17,7 @@ module.exports = (app) => {
 
     app.get('/user/logout', userController.logout);
 
-    app.get('/user/details/:email', userController.details);
+    app.get('/user/details/:id', userController.details);
 
     app.get('/article/create', articleController.createGet);
     app.post('/article/create', articleController.createPost);
@@ -30,6 +31,9 @@ module.exports = (app) => {
     app.post('/article/delete/:id', articleController.deletePost);
 
     app.get('/tag/:name', tagController.listArticlesByTag);
+
+    app.get('/comment/create/:id', commentController.createGet);
+    app.post('/comment/create/:id', commentController.createPost);
 
     app.use((req, res, next) => {
         if(!req.isAuthenticated()){

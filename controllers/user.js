@@ -101,32 +101,28 @@ module.exports = {
 
     details: (req, res) => {
 
-        let email = req.params.email;
+        let id = req.params.id;
 
         if(!req.isAuthenticated()){
-            let returnUrl = `/user/details/${email}`;
+            let returnUrl = `/user/details/${id}`;
             req.session.returnUrl = returnUrl;
 
             res.redirect('/user/login');
             return;
         }
 
-        User.findOne({email: email}).populate('articles').then(user => {
-
-            User.populate(user.fullName, {path: 'fullName'}, (err) => {
-                if (err) {
-                    console.log(err.message);
-                }
-
+        User.findById(id).populate('articles').then(user => {
                 Tag.populate(user.articles, {path: 'tags'}, (err) => {
                     if (err) {
                         console.log(err.message);
                     }
-                    res.render('user/details', user);
+
+                    if(req.user.id === id){
+                        res.render('user/details', {user: user, isUserAuthorized: true});
+                    } else {
+                        res.render('user/details', {user: user, isUserAuthorized: false});
+                    }
                 })
             });
-
-
-        })
     }
 };

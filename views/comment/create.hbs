@@ -1,0 +1,65 @@
+<div class="container body-content span=8 offset=2">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <header>
+                        <h2>{{article.title}}</h2>
+                    </header>
+
+                    <p>
+                        {{article.content}}
+                    </p>
+
+                    <small class="author">
+                        {{article.author.fullName}}
+                    </small>
+
+                    <footer>
+                        <div class="pull-left">
+                            {{# each article.tags}}
+                                <a class="btn btn-default btn-xs"
+                                   href="/tag/{{this.name}}">{{ this.name }}</a>
+                            {{/each}}
+                        </div>
+                    </footer>
+                    </article>
+            </div>
+        </div>
+        </div>
+
+        <form class="form-horizontal" method="POST" action="/comment/create/{{article.id}}">
+            <fieldset>
+                <legend>New Comment</legend>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="inputEmail">Email</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="authorEmail" required value={{authorEmail}} >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="inputFullName">Full Name</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="inputFullName" placeholder="Full Name" required name="authorFullName" value={{authorFullName}}>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="articleContent">Content</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="articleContent" rows="5" name="content" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+
+                        <button type="reset" class="btn btn-default">Cancel</button>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+</div>
