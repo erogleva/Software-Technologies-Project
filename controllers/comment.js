@@ -20,7 +20,7 @@ module.exports = {
             Article.findById(articleId).then(article => {
                 article.comments.push(comment.id);
                 article.save();
-                res.redirect('/');
+                res.redirect(`/article/details/${articleId}`);
 
             })
         })

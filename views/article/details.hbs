@@ -33,4 +33,17 @@
             </article>
         </div>
     </div>
+
+    <br/>
+
+    {{#each article.comments}}
+        <div class="row">
+                <div class="panel panel-default col-md-6">
+                    <div class="panel-heading"> Comment by <a href="mailto:{{this.authorEmail}}"> {{this.authorFullName}} </a></div>
+                    <div class="panel-body">
+                    {{this.content}}
+                    </div>
+                </div>
+            </div>
+    {{/each}}
 </div>

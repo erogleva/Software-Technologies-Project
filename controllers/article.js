@@ -54,7 +54,7 @@ module.exports = {
     details: (req, res) => {
         let id = req.params.id;
 
-        Article.findById(id).populate('author tags').then(article => {
+        Article.findById(id).populate('author tags comments').then(article => {
             if (!req.user){
                 res.render('article/details', { article: article, isUserAuthorized: false});
                 return;
