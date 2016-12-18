@@ -1,5 +1,6 @@
 const Article = require('mongoose').model('Article');
 const Category = require('mongoose').model('Category');
+const Comment = require('mongoose').model('Comment');
 const initializeTags = require('./../models/Tag').initializeTags;
 
 module.exports = {

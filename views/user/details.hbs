@@ -9,7 +9,6 @@
                     <input type="text" class="form-control" id="email" value="{{user.email}}" disabled>
                 </div>
             {{/if}}
-
                 <div class="form-group">
                     <label for="fullName" class="h4">Full Name:</label>
                     <input type="text" class="form-control"  id="fullName" value="{{user.fullName}}" disabled>
@@ -39,8 +38,10 @@
                     </p>
                         <div class="pull-right">
                             <a class="btn btn-default btn-xs" href="/article/details/{{this.id}}">Read more &raquo;</a>
+                {{#if isUserAuthorized}}
                             <a class="btn btn-success btn-xs" href="/article/edit/{{this.id}}">Edit &raquo;</a>
                             <a class="btn btn-danger btn-xs" href="/article/delete/{{this.id}}">Delete &raquo;</a>
+                {{/if}}
                         </div>
                 </article>
             </div>

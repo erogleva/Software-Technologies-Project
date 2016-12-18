@@ -62,14 +62,20 @@ articleSchema.method({
                     tag.save();
                 }
             });
+
+            let Comment = mongoose.model('Comment');
+            for(let commentId of this.comments){
+                Comment.findById(commentId).then(comment => {
+                    comment.remove();
+                })
+            }
         }
     },
 
     deleteTag: function (tagId){
         this.tags.remove(tagId);
         this.save();
-    }
-
+    },
 
 });
 

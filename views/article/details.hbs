@@ -43,6 +43,12 @@
                     <div class="panel-body">
                     {{this.content}}
                     </div>
+                    {{#if isAdmin}}
+                    <div class="panel-footer">
+                        <a href="/comment/edit/{{this.id}}" class="btn btn-success btn-xs">Edit Comment</a>
+                        <a href="/comment/delete/{{this.id}}" class="btn btn-danger btn-xs">Delete Comment</a>
+                    </div>
+                    {{/if}}
                 </div>
             </div>
     {{/each}}
