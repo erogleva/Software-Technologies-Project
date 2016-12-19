@@ -14,7 +14,7 @@
                 <tbody>
                 {{#each users}}
                     <tr {{#if this.isAdmin }}class="info" {{/if}}>
-                        <td>{{ this.id }}</td>
+                         <td> <a href="/user/details/{{this.id}}">{{ this.id }} </a> </td>
                         <td>{{ this.fullName }}</td>
                         <td>{{ this.email }}</td>
                         <td>

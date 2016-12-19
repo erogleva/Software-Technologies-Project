@@ -186,7 +186,6 @@ module.exports = {
         });
     },
 
-
     deletePost: (req, res) => {
         let id = req.params.id;
 

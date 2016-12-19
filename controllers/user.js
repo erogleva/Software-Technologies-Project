@@ -19,6 +19,15 @@ module.exports = {
                 errorMsg = 'Passwords do not match!'
             }
 
+            let regexPattern = /\w{5,}@\w+.\w+/g;
+            let isMatching = registerArgs.email.match(regexPattern);
+
+            if(!isMatching){
+                errorMsg = 'Invalid Email!'
+            }
+
+
+
             if (errorMsg) {
                 registerArgs.error = errorMsg;
                 res.render('user/register', registerArgs)
@@ -104,9 +113,15 @@ module.exports = {
         let id = req.params.id;
 
         if(!req.isAuthenticated()){
+                let returnUrl = `/user/details/${id}`;
+                req.session.returnUrl = returnUrl;
+                res.redirect('/user/login');
+                return;
+        }
+
+        if(req.user.id !== id){
             let returnUrl = `/user/details/${id}`;
             req.session.returnUrl = returnUrl;
-
             res.redirect('/user/login');
             return;
         }

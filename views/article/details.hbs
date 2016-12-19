@@ -36,16 +36,14 @@
 
     <br/>
 
-
-    {{#if isAdmin}}
-    {{#each article.comments}}
+        {{#if isAdmin}}
+        {{#each article.comments}}
         <div class="row">
                 <div class="panel panel-default col-md-6">
                     <div class="panel-heading"> Comment by <a href="mailto:{{this.authorEmail}}"> {{this.authorFullName}} </a></div>
                     <div class="panel-body">
                     {{this.content}}
                     </div>
-
                     <div class="panel-footer">
                         <a href="/admin/comment/edit/{{this.id}}" class="btn btn-success btn-xs">Edit Comment</a>
                         <a href="/admin/comment/delete/{{this.id}}" class="btn btn-danger btn-xs">Delete Comment</a>
@@ -68,4 +66,5 @@
             </div>
         {{/each}}
     {{/unless}}
+</div>
 </div>
