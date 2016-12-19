@@ -6,8 +6,10 @@ const Tag = mongoose.model('Tag');
 
 module.exports = {
   index: (req, res) => {
-      Category.find({}).then(categories => {
-          res.render('home/index',{categories: categories});
+      Article.find({}).limit(6).populate('author tags').then(articles => {
+          Category.find({}).then(categories => {
+              res.render('home/index',{articles: articles, categories: categories});
+          })
       })
   },
 

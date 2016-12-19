@@ -37,6 +37,22 @@ textarea {
   max-width: 280px;
 }
 
+
+.sidebar-right{
+  float:right;
+}
+
+.sidebar-right .main{
+  float:left;
+}
+.sidebar-right .sidebar{
+  float:right;
+}
+
+.sidebar{
+  margin-top: 3em;
+}
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;

@@ -65,11 +65,11 @@ module.exports = (app) => {
     app.get('/admin/category/delete/:id', adminController.category.deleteGet);
     app.post('/admin/category/delete/:id', adminController.category.deletePost);
 
-    app.get('/comment/edit/:id', commentController.editGet);
-    app.post('/comment/edit/:id', commentController.editPost);
+    app.get('/admin/comment/edit/:id', adminController.comment.editGet);
+    app.post('/admin/comment/edit/:id', adminController.comment.editPost);
 
-    app.get('/comment/delete/:id', commentController.deleteGet);
-    app.post('/comment/delete/:id', commentController.deletePost);
+    app.get('/admin/comment/delete/:id', adminController.comment.deleteGet);
+    app.post('/admin/comment/delete/:id', adminController.comment.deletePost);
 
 };
 

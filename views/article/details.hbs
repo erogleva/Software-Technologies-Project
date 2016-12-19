@@ -23,11 +23,11 @@
                     </div>
                     <div class="pull-right">
                         {{#if isUserAuthorized}}
-                            <a class="btn btn-success btn-xs" href="/article/edit/{{article.id}}">Edit &raquo;</a>
-                            <a class="btn btn-danger btn-xs" href="/article/delete/{{article.id}}">Delete &raquo;</a>
+                            <a class="btn btn-success btn-sm" href="/article/edit/{{article.id}}">Edit &raquo;</a>
+                            <a class="btn btn-danger btn-sm" href="/article/delete/{{article.id}}">Delete &raquo;</a>
                         {{/if}}
-                        <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
-                        <a class="btn btn-default btn-xs" href="/comment/create/{{article.id}}">Add Comment &raquo;</a>
+                        <a class="btn btn-default btn-sm" href="/">Back &raquo;</a>
+                        <a class="btn btn-default btn-sm" href="/comment/create/{{article.id}}">Add Comment &raquo;</a>
                     </div>
                 </footer>
             </article>
@@ -36,6 +36,8 @@
 
     <br/>
 
+
+    {{#if isAdmin}}
     {{#each article.comments}}
         <div class="row">
                 <div class="panel panel-default col-md-6">
@@ -43,13 +45,27 @@
                     <div class="panel-body">
                     {{this.content}}
                     </div>
-                    {{#if isAdmin}}
+
                     <div class="panel-footer">
-                        <a href="/comment/edit/{{this.id}}" class="btn btn-success btn-xs">Edit Comment</a>
-                        <a href="/comment/delete/{{this.id}}" class="btn btn-danger btn-xs">Delete Comment</a>
+                        <a href="/admin/comment/edit/{{this.id}}" class="btn btn-success btn-xs">Edit Comment</a>
+                        <a href="/admin/comment/delete/{{this.id}}" class="btn btn-danger btn-xs">Delete Comment</a>
                     </div>
-                    {{/if}}
+
                 </div>
             </div>
     {{/each}}
+    {{/if}}
+
+    {{#unless isAdmin}}
+        {{#each article.comments}}
+            <div class="row">
+                <div class="panel panel-default col-md-6">
+                    <div class="panel-heading"> Comment by <a href="mailto:{{this.authorEmail}}"> {{this.authorFullName}} </a></div>
+                    <div class="panel-body">
+                        {{this.content}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{/unless}}
 </div>

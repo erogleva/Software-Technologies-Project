@@ -1,16 +1,50 @@
-<div class="container body-content">
-    <div class="row">
-        {{#each categories}}
-            <div class="col-md-6">
-                <header>
-                    <h2>
-                        <a href="/category/{{ this.id }}">
-                            {{ this.name }} ({{
-                        this.articles.length }})
-                        </a>
-                    </h2>
-                </header>
+<div class="container">
+            <div class="main col-md-8">
+            <div class="row">
+                {{#each articles}}
+                <article>
+                    <header>
+                        <h2>{{ this.title }}</h2>
+                    </header>
+                    <p>
+                        {{ this.content }}
+                    </p>
+                    <p>
+                        {{#each this.tags }}
+                            <a class="btn btn-default btn-xs"
+                               href="/tag/{{this.name}}">{{ this.name }}</a>
+                        {{/each}}
+                    </p>
+
+                    <small class="author">
+                        {{ this.author.fullName }}
+                    </small>
+                    <footer>
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs" href="/article/details/{{this.id}}">Read more &raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            {{/each}}
+
             </div>
-        {{/each}}
-        </div>
+            </div>
+    <div class="sidebar col-md-3 col-md-offset-1">
+        <header>
+            <h4>Categories</h4>
+        </header>
+        <ul class="list-group">
+            {{#each categories}}
+                <li class="list-group-item">
+                    <span class="badge">{{this.articles.length }}</span>
+                    <a href="/category/{{ this.id }}"> {{ this.name }}  </a>
+                </li>
+            {{/each}}
+        </ul>
     </div>
+</div>
+
+
+
+
+

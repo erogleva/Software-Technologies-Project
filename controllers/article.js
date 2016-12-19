@@ -57,14 +57,14 @@ module.exports = {
 
         Article.findById(id).populate('author tags comments').then(article => {
             if (!req.user){
-                res.render('article/details', { article: article, isUserAuthorized: false});
+                res.render('article/details', { article: article, isUserAuthorized: false, isAdmin: false});
                 return;
             }
 
             req.user.isInRole('Admin').then(isAdmin => {
                 let isUserAuthorized = isAdmin || req.user.isAuthor(article);
 
-                res.render('article/details', { article: article, isUserAuthorized: isUserAuthorized});
+                res.render('article/details', { article: article, isUserAuthorized: isUserAuthorized, isAdmin: isAdmin});
             });
         });
     },
