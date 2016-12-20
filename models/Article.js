@@ -7,7 +7,8 @@ let articleSchema = mongoose.Schema({
     category: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Category'},
     tags: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Tag'}],
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
-    date: {type: Date, default: Date.now()}
+    date: {type: Date, default: Date.now()},
+    picture:{data:Buffer, contentType:String, path:String, name:String}
 });
 
 articleSchema.method({

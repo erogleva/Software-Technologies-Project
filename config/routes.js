@@ -4,6 +4,7 @@ const homeController = require('./../controllers/home');
 const adminController = require('./../controllers/admin/admin');
 const tagController = require('./../controllers/tag');
 const commentController = require('./../controllers/comment');
+const multer = require('multer');
 
 module.exports = (app) => {
     app.get('/', homeController.index);
@@ -20,7 +21,7 @@ module.exports = (app) => {
     app.get('/user/details/:id', userController.details);
 
     app.get('/article/create', articleController.createGet);
-    app.post('/article/create', articleController.createPost);
+    app.post('/article/create', multer({ dest: './public/uploads/'}).single('upl'), articleController.createPost);
 
     app.get('/article/details/:id', articleController.details);
 
@@ -34,6 +35,7 @@ module.exports = (app) => {
 
     app.get('/comment/create/:id', commentController.createGet);
     app.post('/comment/create/:id', commentController.createPost);
+
 
     app.use((req, res, next) => {
         if(!req.isAuthenticated()){

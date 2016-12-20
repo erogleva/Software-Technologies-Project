@@ -20,6 +20,7 @@ module.exports = (config) => {
     require('./../models/Category');
     require('./../models/Tag');
     require('./../models/Comment');
+
 };
 
 

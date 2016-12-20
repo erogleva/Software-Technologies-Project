@@ -1,9 +1,8 @@
 <div class="container body-content span=8 offset=2">
     <div class="well">
-        <form class="form-horizontal" method="POST" action="/article/create">
+        <form class="form-horizontal" method="POST" action="/article/create" enctype="multipart/form-data">
             <fieldset>
                 <legend>New Article</legend>
-
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="articleTitle">Article Title</label>
                     <div class="col-sm-4 ">
@@ -36,6 +35,20 @@
                         <input type="text" class="form-control" id="article_tags"
                                placeholder="Tags"
                                name="tagNames">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="imageUpload">Upload an image</label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                        <span class="btn btn-sm btn-default">
+                        Browse &hellip; <input type="file" style="display: none;" id="imageUpload" name="upl" multiple>
+                        </span>
+                        </label>
+                        <input type="text" class="form-control" readonly>
+                        </div>
                     </div>
                 </div>
 

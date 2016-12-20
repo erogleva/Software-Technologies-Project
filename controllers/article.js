@@ -2,6 +2,7 @@ const Article = require('mongoose').model('Article');
 const Category = require('mongoose').model('Category');
 const Comment = require('mongoose').model('Comment');
 const initializeTags = require('./../models/Tag').initializeTags;
+const fs = require('fs');
 
 module.exports = {
     createGet: (req, res) => {
@@ -41,10 +42,21 @@ module.exports = {
             return;
         }
 
-        articleArgs.author = req.user.id;
-        articleArgs.tags = [];
-        Article.create(articleArgs).then(article => {
+        var articleObject = new Article();
+        console.log(req.file);
+        if(req.file){
+            articleObject.picture.data = fs.readFileSync(req.file.path);
+            articleObject.picture.path=req.file.path;
+            articleObject.picture.contentType='image/jpeg';
+            articleObject.picture.name=req.file.filename;
+        }
+        articleObject.author = req.user.id;
+        articleObject.content = req.body.content;
+        articleObject.title = req.body.title;
+        articleObject.category = req.body.category;
+        articleObject.tags = [];
 
+        Article.create(articleObject).then(article => {
             let tagNames = articleArgs.tagNames.split(/\s+|,/).filter(tag => {return tag});
             initializeTags(tagNames, article.id);
             article.prepareInsert();
