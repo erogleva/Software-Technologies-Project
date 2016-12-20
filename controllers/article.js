@@ -49,6 +49,7 @@ module.exports = {
             articleObject.picture.path=req.file.path;
             articleObject.picture.contentType='image/jpeg';
             articleObject.picture.name=req.file.filename;
+            articleObject.picture.originalName=req.file.originalname;
         }
         articleObject.author = req.user.id;
         articleObject.content = req.body.content;
@@ -137,6 +138,14 @@ module.exports = {
                     if(article.category.id !== articleArgs.category){
                         article.category.articles.remove(article.id);
                         article.category.save();
+                    }
+
+                    if(req.file){
+                        article.picture.data = fs.readFileSync(req.file.path);
+                        article.picture.path=req.file.path;
+                        article.picture.contentType='image/jpeg';
+                        article.picture.name=req.file.filename;
+                        article.picture.originalName=req.file.originalname;
                     }
 
                     article.category = articleArgs.category;

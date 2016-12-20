@@ -1,6 +1,6 @@
 <div class="container body-content span=8 offset=2">
     <div class="well">
-        <form class="form-horizontal" method="POST" action="/article/edit/{{id}}">
+        <form class="form-horizontal" method="POST" action="/article/edit/{{id}}" enctype="multipart/form-data">
             <fieldset>
                 <legend>Edit Article</legend>
 
@@ -34,6 +34,20 @@
                     <div class="col-sm-4 ">
                         <input type="text" class="form-control" id="tags" name="tags"
                                value="{{ tagNames }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="imageUpload">Upload an image</label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                        <span class="btn btn-sm btn-default">
+                        Browse &hellip; <input type="file" style="display: none;" id="imageUpload" name="upl" multiple>
+                        </span>
+                            </label>
+                            <input type="text" class="form-control" value="{{picture.originalName}}">
+                        </div>
                     </div>
                 </div>
 

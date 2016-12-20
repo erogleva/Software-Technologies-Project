@@ -8,8 +8,16 @@ const multer = require('multer');
 
 module.exports = (app, config) => {
     // View engine setup.
+
     app.set('views', path.join(config.rootFolder, '/views'));
     app.set('view engine', 'hbs');
+
+    var hbs = require('hbs');
+
+    hbs.registerHelper('trimString', function(passedString) {
+        var theString = passedString.substring(0,450);
+        return new hbs.SafeString(theString)
+    });
 
     // This set up which is the parser for the request's data.
     app.use(bodyParser.json());
