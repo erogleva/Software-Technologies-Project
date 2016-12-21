@@ -70,14 +70,25 @@ module.exports = {
 
         Article.findById(id).populate('author tags comments').then(article => {
             if (!req.user){
-                res.render('article/details', { article: article, isUserAuthorized: false, isAdmin: false});
+
+                let hasPicture = true;
+                if(!article.picture.name){
+                    hasPicture = false;
+                }
+                res.render('article/details', { article: article, isUserAuthorized: false, isAdmin: false, hasPicture: hasPicture});
                 return;
             }
 
             req.user.isInRole('Admin').then(isAdmin => {
                 let isUserAuthorized = isAdmin || req.user.isAuthor(article);
 
-                res.render('article/details', { article: article, isUserAuthorized: isUserAuthorized, isAdmin: isAdmin});
+                let hasPicture = true;
+
+                if(!article.picture.name){
+                    hasPicture = false;
+                }
+
+                res.render('article/details', { article: article, isUserAuthorized: isUserAuthorized, isAdmin: isAdmin, hasPicture: hasPicture});
             });
         });
     },

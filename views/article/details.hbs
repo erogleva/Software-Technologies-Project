@@ -6,11 +6,15 @@
                     <h2>{{article.title}}</h2>
                 </header>
 
+
+                {{#if hasPicture}}
                 <div class="col-md-4">
                     <div class="thumbnail">
                         <img src="/uploads/{{article.picture.name}}" alt="" class="img-rounded">
                     </div>
                 </div>
+                {{/if}}
+
                 <p>
                     {{ article.content}}
                 </p>
@@ -73,5 +77,4 @@
             </div>
         {{/each}}
     {{/unless}}
-</div>
 </div>
